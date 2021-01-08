@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ArduinoBT">
-        <activity android:name=".MainActivity" android:screenOrientation="landscape">
+        <activity android:name=".DispositivosVinculados"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

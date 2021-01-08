@@ -13,13 +13,13 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/IngresoTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:hint="Escriba un texto"
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/Conectar"
@@ -32,7 +32,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/Izquierda"
@@ -51,7 +51,7 @@
             app:srcCompat="@drawable/flecha_correcta" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/Claxon"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
@@ -65,15 +65,36 @@
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:scaleType="fitStart"
-            app:srcCompat="@drawable/acelerador" />
+            app:srcCompat="@drawable/freno" />
 
         <ImageButton
-            android:id="@+id/Atras"
+            android:id="@+id/Acelerador"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="20dp"
             android:scaleType="fitStart"
-            app:srcCompat="@drawable/freno" />
+            app:srcCompat="@drawable/acelerador" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/Estado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Estado"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/Desconectar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Desconectar" />
     </LinearLayout>
 
 </LinearLayout>
