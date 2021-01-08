@@ -36,24 +36,24 @@
 
         <ImageButton
             android:id="@+id/Izquierda"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
             android:layout_marginTop="20dp"
-            android:scaleType="fitStart"
+            android:scaleType="centerInside"
             app:srcCompat="@drawable/flecha_izquierda" />
 
         <ImageButton
             android:id="@+id/Derecha"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
             android:layout_marginTop="20dp"
-            android:scaleType="fitStart"
+            android:scaleType="centerInside"
             app:srcCompat="@drawable/flecha_correcta" />
 
         <ImageButton
             android:id="@+id/Claxon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
@@ -61,18 +61,18 @@
 
         <ImageButton
             android:id="@+id/Freno"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
             android:layout_marginTop="20dp"
-            android:scaleType="fitStart"
+            android:scaleType="centerInside"
             app:srcCompat="@drawable/freno" />
 
         <ImageButton
             android:id="@+id/Acelerador"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="120dp"
+            android:layout_height="150dp"
             android:layout_marginTop="20dp"
-            android:scaleType="fitStart"
+            android:scaleType="centerInside"
             app:srcCompat="@drawable/acelerador" />
     </LinearLayout>
 

@@ -16,9 +16,12 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
-            android:text="Dispositivos Vinculados"
-            android:textSize="18sp" />
+            android:text="Dispositivos vinculados:"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -29,6 +32,7 @@
         android:orientation="vertical">
 
         <ListView
+            android:id="@+id/ListaBT"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
