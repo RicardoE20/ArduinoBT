@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity
@@ -48,12 +50,36 @@ public class MainActivity extends AppCompatActivity
         {
             public void handleMessage(android.os.Message msg)
             {
-                if(msg.what == handlerState)
+                if(msg.what == HandlerState)
                 {
+                    char MyChar = (char) msg.obj;
 
+                    if(MyChar == 'F')
+                    {
+                        Estado.setText("Acelerador");
+                    }
+                    if(MyChar == 'B')
+                    {
+                        Estado.setText("Reversa");
+                    }
+                    if(MyChar == 'R')
+                    {
+                        Estado.setText("Derecha");
+                    }
+                    if(MyChar == 'L')
+                    {
+                        Estado.setText("Izquierda");
+                    }
+                    if(MyChar == 'V')
+                    {
+                        Estado.setText("Claxon");
+                    }
                 }
             }
         };
+
+        BTAdapter = BluetoothAdapter.getDefaultAdapter();
+        VerificarStadoBT();
 
         Conectar = findViewById(R.id.Conectar);
         Desconectar = findViewById(R.id.Desconectar);
@@ -99,7 +125,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-
+                MyBTCnx.write("L");
             }
         });
 
@@ -108,7 +134,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-
+                MyBTCnx.write("R");
             }
         });
 
@@ -117,7 +143,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-
+                MyBTCnx.write("H");
             }
         });
 
@@ -126,7 +152,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-
+                MyBTCnx.write("B");
             }
         });
 
@@ -135,7 +161,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-
+                MyBTCnx.write("F");
             }
         });
     }
@@ -212,9 +238,54 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private class ConnectedThread(BluetoothSocket socket)
+    private class ConnectedThread extends  Thread
     {
-        ///---11:37 P2
-    }
+        private final InputStream mmInStream;
+        private final OutputStream mmOutStream;
 
+        public ConnectedThread(BluetoothSocket socket)
+        {
+            InputStream tmpIn = null;
+            OutputStream tmpOut = null;
+
+            try
+            {
+                tmpIn = socket.getInputStream();
+                tmpOut = socket.getOutputStream();
+            }
+            catch (IOException e) { }
+
+            mmInStream = tmpIn;
+            mmOutStream = tmpOut;
+        }
+
+        public void run()
+        {
+            byte[] byte_in = new byte[1];
+
+            while(true)
+            {
+                try
+                {
+                    mmInStream.read(byte_in);
+                    char ch = (char) byte_in[0];
+                    BTIn.obtainMessage(HandlerState, ch).sendToTarget();
+                }catch (IOException e){ break; }
+            }
+        }
+
+        public void write(String input)
+        {
+            try
+            {
+                mmOutStream.write(input.getBytes());
+            }
+            catch (IOException e)
+            {
+                Toast.makeText(getBaseContext(), "La conexion fallo!" , Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+
+    }
 }
