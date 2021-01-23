@@ -88,30 +88,37 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        Izquierda.setOnClickListener(new View.OnClickListener()
-        {
+        Izquierda.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v)
-            {
-                MyBTCnx.write("L");
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        MyBTCnx.write("L");
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        MyBTCnx.write("S");
+                        break;
+                }
+                return true;
             }
         });
 
-        Derecha.setOnClickListener(new View.OnClickListener()
-        {
+        Derecha.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v)
-            {
-                MyBTCnx.write("R");
-            }
-        });
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        MyBTCnx.write("R");
+                        break;
 
-        Claxon.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                MyBTCnx.write("H");
+                    case MotionEvent.ACTION_UP:
+                        MyBTCnx.write("S");
+                        break;
+                }
+                return true;
             }
         });
 
@@ -124,10 +131,12 @@ public class MainActivity extends AppCompatActivity
                     case MotionEvent.ACTION_DOWN:
                         MyBTCnx.write("F");
                         break;
+
                     case MotionEvent.ACTION_UP:
+                        MyBTCnx.write("S");
                         break;
                 }
-                return false;
+                return true;
             }
         });
 
@@ -138,14 +147,31 @@ public class MainActivity extends AppCompatActivity
                 switch (event.getAction())
                 {
                     case MotionEvent.ACTION_DOWN:
-                        MyBTCnx.write("B");
-                        break;
+                            MyBTCnx.write("B");
+                            break;
 
                     case MotionEvent.ACTION_UP:
+                        MyBTCnx.write("S");
                         break;
                 }
 
-                return false;
+                return true;
+            }
+        });
+
+        Claxon.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        MyBTCnx.write("V");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        MyBTCnx.write("v");
+                        break;
+                }
+                return true;
             }
         });
     }
