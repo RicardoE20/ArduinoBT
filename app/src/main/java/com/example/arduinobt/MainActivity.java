@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,9 +23,8 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity
 {
-    private Button Conectar, Desconectar;
+    private Button Desconectar;
     private TextView Estado;
-    private EditText IngresoTxt;
     private ImageButton Izquierda, Derecha, Claxon, Acelerador, Freno;
 
     Handler BTIn;
@@ -53,27 +53,6 @@ public class MainActivity extends AppCompatActivity
                 if(msg.what == HandlerState)
                 {
                     char MyChar = (char) msg.obj;
-
-                    if(MyChar == 'F')
-                    {
-                        Estado.setText("Acelerador");
-                    }
-                    if(MyChar == 'B')
-                    {
-                        Estado.setText("Reversa");
-                    }
-                    if(MyChar == 'R')
-                    {
-                        Estado.setText("Derecha");
-                    }
-                    if(MyChar == 'L')
-                    {
-                        Estado.setText("Izquierda");
-                    }
-                    if(MyChar == 'V')
-                    {
-                        Estado.setText("Claxon");
-                    }
                 }
             }
         };
@@ -81,24 +60,13 @@ public class MainActivity extends AppCompatActivity
         BTAdapter = BluetoothAdapter.getDefaultAdapter();
         VerificarStadoBT();
 
-        Conectar = findViewById(R.id.Conectar);
         Desconectar = findViewById(R.id.Desconectar);
         Estado = findViewById(R.id.Estado);
-        IngresoTxt = findViewById(R.id.IngresoTxt);
         Izquierda = findViewById(R.id.Izquierda);
         Derecha = findViewById(R.id.Derecha);
         Claxon = findViewById(R.id.Claxon);
         Acelerador = findViewById(R.id.Acelerador);
         Freno = findViewById(R.id.Freno);
-
-        Conectar.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-
-            }
-        });
 
         Desconectar.setOnClickListener(new View.OnClickListener()
         {
@@ -147,21 +115,37 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        Freno.setOnClickListener(new View.OnClickListener()
-        {
+        Acelerador.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v)
+            public boolean onTouch(View v, MotionEvent event)
             {
-                MyBTCnx.write("B");
+                switch (event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        MyBTCnx.write("F");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        break;
+                }
+                return false;
             }
         });
 
-        Acelerador.setOnClickListener(new View.OnClickListener()
-        {
+        Freno.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v)
+            public boolean onTouch(View v, MotionEvent event)
             {
-                MyBTCnx.write("F");
+                switch (event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        MyBTCnx.write("B");
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        break;
+                }
+
+                return false;
             }
         });
     }
